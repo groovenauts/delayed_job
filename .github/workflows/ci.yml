@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ '**' ]
   pull_request:
     branches: [ master ]
 
@@ -74,19 +74,19 @@ jobs:
       env:
         RAILS_VERSION: ${{ matrix.rails_version }}
       run: bundle exec rspec
-    - name: Coveralls Parallel
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        flag-name: run-${{ matrix.ruby }}-${{ matrix.rails_version }}
-        parallel: true
+    #- name: Coveralls Parallel
+    #  uses: coverallsapp/github-action@master
+    #  with:
+    #    github-token: ${{ secrets.github_token }}
+    #    flag-name: run-${{ matrix.ruby }}-${{ matrix.rails_version }}
+    #    parallel: true
 
-  finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        parallel-finished: true
+  #finish:
+  #  needs: test
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: Coveralls Finished
+  #    uses: coverallsapp/github-action@master
+  #    with:
+  #      github-token: ${{ secrets.github_token }}
+  #      parallel-finished: true
